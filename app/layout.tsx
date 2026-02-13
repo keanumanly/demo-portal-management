@@ -1,16 +1,8 @@
+import React from 'react';
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import Sidebar from '@/components/Sidebar';
+import Header from '@/components/Header';
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Portal Management",
@@ -24,10 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950`} >
+        <Sidebar />
+        <main className="ml-72">
+          <Header />
+          <div className="p-8">
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   );
