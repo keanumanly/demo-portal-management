@@ -84,7 +84,7 @@ export default function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps)
             <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
             <h3 className="text-sm font-semibold text-cyan-400">Live Now</h3>
           </div>
-          <p className="text-2xl font-bold text-white font-mono mb-1">23</p>
+          <p className="text-2xl font-bold text-white font-mono mb-1">1,247</p>
           <p className="text-xs text-slate-300">Active calls being analyzed</p>
         </div>
         }
