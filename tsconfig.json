@@ -26,6 +26,9 @@
       "@/components/headers/*": [
         "./app/components/headers/*"
       ],
+      "@/notifications/common/*": [
+        "./app/notifications/common/*"
+      ],
       "@/config/*": [
         "./config/*"
       ],
