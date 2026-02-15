@@ -9,7 +9,7 @@ import SearchBar from '@/components/headers/SearchBar';
 import QuickStatus from '@/components/headers/QuickStats';
 import NotificationDropdown from '@/components/headers/NotificationDropdown';
 import ProfileMenu from '@/components/headers/ProfileMenu'
-import { QuickStats } from '@/lib/mockdata';
+import { QuickStats, notifdata } from '@/lib/mockdata';
 
 interface HeaderProps {
   todayCalls?: number;
@@ -27,43 +27,15 @@ interface Notification {
 }
 
 export default function Header({ 
-  todayCalls = 1247, 
-  avgDuration = '4:32', 
-  sentiment = 87 
+  todayCalls, 
+  avgDuration, 
+  sentiment 
 }: HeaderProps) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-
   const notificationRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
-
-  // Mock notifications
-  const [notifications, setNotifications] = useState<Notification[]>([
-    { 
-      id: '1', 
-      type: 'critical', 
-      title: 'Call escalation needed', 
-      message: 'Customer needs supervisor assistance',
-      time: '2 min ago', 
-      read: false 
-    },
-    { 
-      id: '2', 
-      type: 'alert', 
-      title: 'Sentiment dropped 15%', 
-      message: 'Negative sentiment spike detected',
-      time: '30 min ago', 
-      read: false 
-    },
-    { 
-      id: '3', 
-      type: 'info', 
-      title: 'Weekly report ready', 
-      message: 'Your analytics report is available',
-      time: '2 hours ago', 
-      read: true 
-    },
-  ]);
+  const [notifications, setNotifications] = useState<Notification[]>(notifdata);
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
