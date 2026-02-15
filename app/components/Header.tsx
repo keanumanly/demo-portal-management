@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { 
-  Search, 
   Bell, 
   User, 
   Settings, 
@@ -13,6 +12,10 @@ import {
   Moon,
   Sun
 } from 'lucide-react';
+import SearchBar from '@/components/headers/SearchBar';
+import QuickStatus from '@/components/headers/QuickStats';
+import NotificationDropdown from '@/components/headers/NotificationDropdown';
+import { QuickStats } from '@/lib/mockdata';
 
 interface HeaderProps {
   todayCalls?: number;
@@ -34,7 +37,6 @@ export default function Header({
   avgDuration = '4:32', 
   sentiment = 87 
 }: HeaderProps) {
-  const [searchQuery, setSearchQuery] = useState('');
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -87,59 +89,25 @@ export default function Header({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Mark notification as read
-  const markAsRead = (id: string) => {
-    setNotifications(prev => 
-      prev.map(n => n.id === id ? { ...n, read: true } : n)
-    );
-  };
-
-  // Mark all as read
-  const markAllAsRead = () => {
-    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
-  };
-
   return (
     <header className="glass-effect border-b border-slate-800/50 px-8 py-4 sticky top-0 z-40">
       <div className="flex items-center justify-between">
-        {/* Search */}
-        <div className="relative flex-1 max-w-2xl mr-5">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Search calls, agents, transcripts... (Ctrl+K)"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="
-              pl-10 pr-4 py-2 w-full
-              bg-slate-800/50 border border-slate-700/50 rounded-lg 
-              text-sm text-slate-200 placeholder-slate-500 
-              focus:outline-none focus:border-cyan-500/50 focus:bg-slate-800 
-              transition-all
-            "
-          />
-        </div>
-
+        <SearchBar />
         <div className="flex items-center gap-4">
-          {/* Quick Stats */}
-          <div className="hidden lg:flex items-center gap-6 px-4 py-2 bg-slate-800/30 rounded-lg border border-slate-700/30">
-            <StatItem label="Today" value={todayCalls.toLocaleString()} />
-            <Divider />
-            <StatItem label="Avg Duration" value={avgDuration} />
-            <Divider />
-            <StatItem label="Sentiment" value={`${sentiment}%`} valueColor="text-emerald-400" />
-          </div>
-
-          {/* Notifications */}
+          <QuickStatus 
+            todayCalls={QuickStats.calls}
+            avgDuration={QuickStats.duration}
+            sentiment={QuickStats.sentiment}
+            />
           <div className="relative" ref={notificationRef}>
             <button 
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 text-slate-400 hover:text-white transition-colors"
+              className="relative p-2 text-slate-400 hover:text-white transition-colors cursor-pointer"
               aria-label="Notifications"
             >
               <Bell className="w-5 h-5" />
               {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                   {unreadCount > 9 ? '9+' : unreadCount}
                 </span>
               )}
@@ -147,61 +115,11 @@ export default function Header({
 
             {/* Notification Dropdown */}
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 glass-effect border border-slate-700/50 rounded-xl shadow-2xl overflow-hidden animate-scale-in">
-                <div className="p-4 border-b border-slate-800 flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-white">Notifications</h3>
-                  {unreadCount > 0 && (
-                    <button 
-                      onClick={markAllAsRead}
-                      className="text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
-                    >
-                      Mark all read
-                    </button>
-                  )}
-                </div>
-                <div className="max-h-96 overflow-y-auto">
-                  {notifications.length === 0 ? (
-                    <div className="p-8 text-center">
-                      <Bell className="w-8 h-8 text-slate-600 mx-auto mb-2" />
-                      <p className="text-sm text-slate-400">No notifications</p>
-                    </div>
-                  ) : (
-                    notifications.map((notif) => (
-                      <button
-                        key={notif.id}
-                        onClick={() => markAsRead(notif.id)}
-                        className={`
-                          w-full p-4 text-left hover:bg-slate-800/30 transition-colors border-b border-slate-800/50 last:border-0
-                          ${!notif.read ? 'bg-slate-800/20' : ''}
-                        `}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
-                            notif.type === 'critical' ? 'bg-red-500' :
-                            notif.type === 'alert' ? 'bg-amber-500' : 'bg-cyan-500'
-                          }`} />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-white">{notif.title}</p>
-                            <p className="text-xs text-slate-400 mt-1">{notif.message}</p>
-                            <p className="text-xs text-slate-500 mt-1">{notif.time}</p>
-                          </div>
-                          {!notif.read && (
-                            <div className="w-2 h-2 bg-cyan-500 rounded-full flex-shrink-0 mt-2" />
-                          )}
-                        </div>
-                      </button>
-                    ))
-                  )}
-                </div>
-                <div className="p-3 border-t border-slate-800">
-                  <Link 
-                    href="/notifications"
-                    className="text-xs text-cyan-400 hover:text-cyan-300 w-full text-center block transition-colors"
-                  >
-                    View all notifications
-                  </Link>
-                </div>
-              </div>
+              <NotificationDropdown 
+              unreadCount={unreadCount}
+              notifications={notifications}
+              setNotifications={setNotifications}
+              />
             )}
           </div>
 
@@ -209,7 +127,7 @@ export default function Header({
           <div className="relative" ref={profileRef}>
             <button
               onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer"
             >
               <div className="text-right hidden md:block">
                 <p className="text-sm font-medium text-white">Admin User</p>
@@ -275,28 +193,6 @@ export default function Header({
       </div>
     </header>
   );
-}
-
-// Helper Components
-function StatItem({ 
-  label, 
-  value, 
-  valueColor = 'text-white' 
-}: { 
-  label: string; 
-  value: string; 
-  valueColor?: string;
-}) {
-  return (
-    <div className="text-center">
-      <p className="text-xs text-slate-400 mb-0.5">{label}</p>
-      <p className={`text-sm font-bold font-mono ${valueColor}`}>{value}</p>
-    </div>
-  );
-}
-
-function Divider() {
-  return <div className="w-px h-8 bg-slate-700" />;
 }
 
 function MenuDivider() {

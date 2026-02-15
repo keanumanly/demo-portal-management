@@ -1,9 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { navigationItems } from '@/lib/navigation';
+import { QuickStats } from '@/lib/mockdata';
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -51,7 +52,6 @@ export default function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps)
           </button>
         </div>
 
-        {/* Navigation */}
         <nav className="flex-1 space-y-2">
           {navigationItems.map((item, idx) => {
             const Icon = item.icon;
@@ -77,14 +77,13 @@ export default function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps)
           })}
         </nav>
 
-        {/* Live Stats Card */}
         {!isCollapsed && 
         <div className="mt-auto p-4 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
             <h3 className="text-sm font-semibold text-cyan-400">Live Now</h3>
           </div>
-          <p className="text-2xl font-bold text-white font-mono mb-1">1,247</p>
+          <p className="text-2xl font-bold text-white font-mono mb-1">{QuickStats.calls.toLocaleString()}</p>
           <p className="text-xs text-slate-300">Active calls being analyzed</p>
         </div>
         }
