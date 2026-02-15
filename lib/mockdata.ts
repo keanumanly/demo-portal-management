@@ -36,31 +36,59 @@ export interface Notiftypes {
     title: string;
     message: string;
     time: string;
-    read: boolean; 
+    date: string;
+    read: boolean;
+    category: 'calls' | 'agents' | 'system' | 'reports';
 }
 export const notifdata: Notiftypes[] = [
-    { 
-      id: "1", 
-      type: 'critical', 
-      title: 'Call escalation needed', 
-      message: 'Customer needs supervisor assistance',
-      time: '2 min ago', 
-      read: false 
+    {
+      id: '1',
+      type: 'critical',
+      title: 'Call escalation needed',
+      message: 'Customer John Doe requires supervisor assistance on call #12345',
+      time: '2 min ago',
+      date: '2024-02-15',
+      read: false,
+      category: 'calls'
     },
-    { 
-      id: "2", 
-      type: 'alert', 
-      title: 'Sentiment dropped 15%', 
-      message: 'Negative sentiment spike detected',
-      time: '30 min ago', 
-      read: false 
+    {
+      id: '2',
+      type: 'alert',
+      title: 'Sentiment score dropped 15%',
+      message: 'Negative sentiment spike detected across 23 calls in the last hour',
+      time: '30 min ago',
+      date: '2024-02-15',
+      read: false,
+      category: 'calls'
     },
-    { 
-      id: "3", 
-      type: 'info', 
-      title: 'Weekly report ready', 
-      message: 'Your analytics report is available',
-      time: '2 hours ago', 
-      read: true 
+    {
+      id: '3',
+      type: 'info',
+      title: 'Weekly report ready',
+      message: 'Your weekly analytics report for Feb 8-14 is now available for download',
+      time: '2 hours ago',
+      date: '2024-02-15',
+      read: true,
+      category: 'reports'
     },
-]
+    {
+      id: '4',
+      type: 'alert',
+      title: 'Agent performance alert',
+      message: 'Sarah Johnson has handled 45 calls today, approaching daily limit',
+      time: '3 hours ago',
+      date: '2024-02-15',
+      read: false,
+      category: 'agents'
+    },
+    {
+      id: '5',
+      type: 'info',
+      title: 'System maintenance scheduled',
+      message: 'Scheduled maintenance on Feb 20, 2024 from 2:00 AM - 4:00 AM EST',
+      time: '1 day ago',
+      date: '2024-02-14',
+      read: true,
+      category: 'system'
+    },
+  ]

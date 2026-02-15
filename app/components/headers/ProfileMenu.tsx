@@ -8,7 +8,6 @@ import {
   Settings, 
   LogOut, 
   HelpCircle,
-  ChevronDown,
   Moon,
   Sun
 } from 'lucide-react';

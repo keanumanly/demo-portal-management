@@ -10,7 +10,9 @@ interface Notification {
     title: string;
     message: string;
     time: string;
+    date: string;
     read: boolean;
+    category: 'calls' | 'agents' | 'system' | 'reports';
   }
 
 interface NotifProps {
@@ -23,12 +25,12 @@ export default function NotificationDropdown({unreadCount, notifications, setNot
 
   const markAsRead = (id: string) => {
     setNotifications(prev => 
-      prev.map(n => n.id === id ? { ...n, read: true } : n)
+      prev.map(notif => notif.id === id ? { ...notif, read: true } : notif)
     );
   };
 
   const markAllAsRead = () => {
-    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+    setNotifications(prev => prev.map(notif => ({ ...notif, read: true })));
   };
 
     return (

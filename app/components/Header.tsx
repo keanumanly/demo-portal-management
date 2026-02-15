@@ -23,7 +23,9 @@ interface Notification {
   title: string;
   message: string;
   time: string;
+  date: string;
   read: boolean;
+  category: 'calls' | 'agents' | 'system' | 'reports';
 }
 
 export default function Header({ 
@@ -33,11 +35,21 @@ export default function Header({
 }: HeaderProps) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [unreadCount, setUnReadCount] = useState(0);
   const notificationRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const [notifications, setNotifications] = useState<Notification[]>(notifdata);
 
-  const unreadCount = notifications.filter(n => !n.read).length;
+
+  useEffect(() => {
+    let isMounted = true;
+    const Count = notifications.filter(n => !n.read).length;
+    setUnReadCount(Count)
+  
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -78,7 +90,6 @@ export default function Header({
               )}
             </button>
 
-            {/* Notification Dropdown */}
             {showNotifications && (
               <NotificationDropdown 
               unreadCount={unreadCount}
@@ -88,7 +99,6 @@ export default function Header({
             )}
           </div>
 
-          {/* User Profile Menu */}
           <div className="relative" ref={profileRef}>
             <button
               onClick={() => setShowProfileMenu(!showProfileMenu)}
@@ -104,7 +114,6 @@ export default function Header({
               <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${showProfileMenu ? 'rotate-180' : ''}`} />
             </button>
 
-            {/* Profile Dropdown */}
             {showProfileMenu && (
               <ProfileMenu />
             )}
