@@ -134,7 +134,6 @@ export default function NotificationsPage() {
       selectAll={selectAll} 
       markAllAsRead={markAllAsRead} />
 
-      {/* Notifications List */}
       <div className="space-y-4">
         {filteredNotifications.length === 0 ? (
           <div className="glass-effect rounded-2xl p-12 text-center">
@@ -228,7 +227,6 @@ export default function NotificationsPage() {
         )}
       </div>
 
-      {/* Pagination */}
       {filteredNotifications.length > 0 && (
         <div className="flex items-center justify-between mt-8 glass-effect rounded-2xl p-4">
           <p className="text-sm text-slate-400">
@@ -244,6 +242,27 @@ export default function NotificationsPage() {
             </button>
             <button className="px-4 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg text-sm text-slate-300 transition-all">
               2
+            </button>
+            <button className="px-4 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg text-sm text-slate-300 transition-all">
+              3
+            </button>
+            <button className="px-4 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg text-sm text-slate-300 transition-all">
+              4
+            </button>
+            <button className="px-4 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg text-sm text-slate-300 transition-all">
+              5
+            </button>
+            <button className="px-4 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg text-sm text-slate-300 transition-all">
+              6
+            </button>
+            <button className="px-4 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg text-sm text-slate-300 transition-all">
+              7
+            </button>
+            <button className="px-4 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg text-sm text-slate-300 transition-all">
+              8
+            </button>
+            <button className="px-4 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg text-sm text-slate-300 transition-all">
+              9
             </button>
             <button className="px-4 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg text-sm text-slate-300 transition-all">
               Next

@@ -29,6 +29,9 @@
       "@/notifications/common/*": [
         "./app/notifications/common/*"
       ],
+      "@/contexts/*": [
+        "./app/contexts/*"
+      ],
       "@/config/*": [
         "./config/*"
       ],

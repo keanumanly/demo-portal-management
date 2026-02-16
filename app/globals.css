@@ -98,3 +98,69 @@ body {
 .recording-pulse {
   animation: pulse-glow 2s ease-in-out infinite;
 }
+
+/* Light mode theme variables */
+:root.light {
+  --bg-primary: 248 250 252;      /* slate-50 */
+  --bg-secondary: 241 245 249;    /* slate-100 */
+  --text-primary: 15 23 42;       /* slate-900 */
+  --text-secondary: 71 85 105;    /* slate-600 */
+}
+
+/* Glass effect light mode */
+.light .glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  backdrop-filter: blur(12px);
+}
+
+/* Text colors light mode */
+.light .text-white {
+  color: rgb(15, 23, 42);
+}
+
+.light .text-slate-300 {
+  color: rgb(71, 85, 105);
+}
+
+.light .text-slate-400 {
+  color: rgb(100, 116, 139);
+}
+
+.light .text-slate-500 {
+  color: rgb(148, 163, 184);
+}
+
+/* Gradient text light mode */
+.light .gradient-text {
+  background: linear-gradient(135deg, #0891b2 0%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Borders light mode */
+.light .border-slate-800 {
+  border-color: rgb(226, 232, 240);
+}
+
+.light .border-slate-700 {
+  border-color: rgb(203, 213, 225);
+}
+
+/* Backgrounds light mode */
+.light .bg-slate-800\/30 {
+  background-color: rgba(248, 250, 252, 0.3);
+}
+
+.light .bg-slate-800\/50 {
+  background-color: rgba(241, 245, 249, 0.5);
+}
+
+/* Body background light mode */
+.light body {
+  background: linear-gradient(
+    to bottom,
+    rgb(241, 245, 249),
+    rgb(248, 250, 252)
+  );
+}

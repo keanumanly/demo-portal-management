@@ -11,6 +11,8 @@ import {
   Moon,
   Sun
 } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
+import HelpSupportModal from '@/components/modals/HelpSupportModal';
 
 
 function MenuDivider() {
@@ -59,9 +61,12 @@ function MenuDivider() {
   }
 
 export default function ProfileMenu(){
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [showMenu, setShowMenu] = useState(false);
+    const [showHelpModal, setShowHelpModal] = useState(false);
+    const { theme, toggleTheme } = useTheme();
     
     return(
+        <>
         <div className="absolute right-0 mt-2 w-64 glass-effect border border-slate-700/50 rounded-xl shadow-2xl overflow-hidden animate-scale-in">
           <div className="p-4 border-b border-slate-800">
             <div className="flex items-center gap-3 mb-3">
@@ -90,11 +95,19 @@ export default function ProfileMenu(){
             <MenuItem icon={Bell} label="Notification Preferences" href="/settings/notifications" />
             <MenuDivider />
             <MenuItem 
-              icon={isDarkMode ? Sun : Moon} 
-              label={isDarkMode ? 'Light Mode' : 'Dark Mode'}
-              onClick={() => setIsDarkMode(!isDarkMode)}
+              icon={theme === 'dark' ? Sun : Moon}
+              label={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+              onClick={toggleTheme}
             />
-            <MenuItem icon={HelpCircle} label="Help & Support" href="/help" />
+            <MenuItem 
+              icon={HelpCircle}
+              label="Help & Support"
+              onClick={() => {
+                setShowMenu(false);
+                setShowHelpModal(true);
+              }}
+            />
+            
           </div>
 
           {/* Logout */}
@@ -107,5 +120,9 @@ export default function ProfileMenu(){
             />
           </div>
         </div>
+        {/* {showHelpModal && (
+          <HelpSupportModal onClose={() => setShowHelpModal(false)} />
+        )} */}
+        </>
         );
 }
