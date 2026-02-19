@@ -3,6 +3,10 @@
 import React, { useState } from 'react';
 import { Edit2, Save, X } from 'lucide-react';
 import ProfileCard from '@/profile/common/ProfileCard'
+import StatsCard from '@/profile/common/StatsCard'
+import PersonalCard from '@/profile/common/PersonalCard'
+import ProfessionalCard from '@/profile/common/ProfessionalCard'
+import RecentCard from '@/profile/common/RecentCard'
 
 export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
@@ -37,9 +41,15 @@ export default function ProfilePage() {
     { label: 'Avg. Rating', value: '4.8', change: '+0.2' }
   ];
 
+  const activity = [
+    { action: 'Reviewed call recording #12345', time: '2 hours ago', type: 'call' },
+    { action: 'Generated weekly report', time: '1 day ago', type: 'report' },
+    { action: 'Updated team schedule', time: '2 days ago', type: 'team' },
+    { action: 'Completed training module', time: '3 days ago', type: 'training' }
+  ]
+
   return (
     <div>
-      {/* Header */}
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-4xl font-bold gradient-text mb-2">My Profile</h1>
@@ -74,180 +84,15 @@ export default function ProfilePage() {
       </div>
 
       <div className="grid grid-cols-3 gap-6">
-        {/* Profile Card */}
         <ProfileCard profile={profile} isEditing={isEditing}/>
-
-        {/* Main Content */}
         <div className="col-span-2 space-y-6">
-          {/* Stats */}
-          <div className="grid grid-cols-4 gap-4">
-            {stats.map((stat, idx) => (
-              <div key={idx} className="glass-effect rounded-2xl p-4">
-                <p className="text-xs text-slate-400 mb-1">{stat.label}</p>
-                <p className="text-2xl font-bold text-white font-mono mb-1">{stat.value}</p>
-                <p className="text-xs text-emerald-400 font-medium">{stat.change}</p>
-              </div>
-            ))}
-          </div>
+          <StatsCard stats={stats}/>
 
-          {/* Personal Information */}
-          <div className="glass-effect rounded-2xl p-6">
-            <h3 className="text-lg font-bold text-white mb-6">Personal Information</h3>
-            
-            <div className="space-y-6">
-              {/* Full Name */}
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">
-                  Full Name
-                </label>
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={editedProfile.name}
-                    onChange={(e) => setEditedProfile({ ...editedProfile, name: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:border-cyan-500/50 transition-all"
-                  />
-                ) : (
-                  <p className="text-white">{profile.name}</p>
-                )}
-              </div>
+          <PersonalCard profile={profile} isEditing={isEditing} editedProfile={editedProfile} setEditedProfile={setEditedProfile}/>
 
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">
-                  Email Address
-                </label>
-                {isEditing ? (
-                  <input
-                    type="email"
-                    value={editedProfile.email}
-                    onChange={(e) => setEditedProfile({ ...editedProfile, email: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:border-cyan-500/50 transition-all"
-                  />
-                ) : (
-                  <p className="text-white">{profile.email}</p>
-                )}
-              </div>
+          <ProfessionalCard profile={profile} isEditing={isEditing} editedProfile={editedProfile} setEditedProfile={setEditedProfile}/>
 
-              {/* Phone */}
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">
-                  Phone Number
-                </label>
-                {isEditing ? (
-                  <input
-                    type="tel"
-                    value={editedProfile.phone}
-                    onChange={(e) => setEditedProfile({ ...editedProfile, phone: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:border-cyan-500/50 transition-all"
-                  />
-                ) : (
-                  <p className="text-white">{profile.phone}</p>
-                )}
-              </div>
-
-              {/* Location */}
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">
-                  Location
-                </label>
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={editedProfile.location}
-                    onChange={(e) => setEditedProfile({ ...editedProfile, location: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:border-cyan-500/50 transition-all"
-                  />
-                ) : (
-                  <p className="text-white">{profile.location}</p>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Professional Information */}
-          <div className="glass-effect rounded-2xl p-6">
-            <h3 className="text-lg font-bold text-white mb-6">Professional Information</h3>
-            
-            <div className="grid grid-cols-2 gap-6">
-              {/* Role */}
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">
-                  Role
-                </label>
-                {isEditing ? (
-                  <select
-                    value={editedProfile.role}
-                    onChange={(e) => setEditedProfile({ ...editedProfile, role: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:border-cyan-500/50 transition-all"
-                  >
-                    <option value="Team Manager">Team Manager</option>
-                    <option value="Supervisor">Supervisor</option>
-                    <option value="Agent">Agent</option>
-                    <option value="Admin">Admin</option>
-                  </select>
-                ) : (
-                  <p className="text-white">{profile.role}</p>
-                )}
-              </div>
-
-              {/* Department */}
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">
-                  Department
-                </label>
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={editedProfile.department}
-                    onChange={(e) => setEditedProfile({ ...editedProfile, department: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:border-cyan-500/50 transition-all"
-                  />
-                ) : (
-                  <p className="text-white">{profile.department}</p>
-                )}
-              </div>
-            </div>
-
-            {/* Bio */}
-            <div className="mt-6">
-              <label className="block text-sm font-medium text-slate-400 mb-2">
-                Bio
-              </label>
-              {isEditing ? (
-                <textarea
-                  value={editedProfile.bio}
-                  onChange={(e) => setEditedProfile({ ...editedProfile, bio: e.target.value })}
-                  rows={3}
-                  className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:border-cyan-500/50 transition-all resize-none"
-                />
-              ) : (
-                <p className="text-white">{profile.bio}</p>
-              )}
-            </div>
-          </div>
-
-          {/* Recent Activity */}
-          <div className="glass-effect rounded-2xl p-6">
-            <h3 className="text-lg font-bold text-white mb-6">Recent Activity</h3>
-            
-            <div className="space-y-4">
-              {[
-                { action: 'Reviewed call recording #12345', time: '2 hours ago', type: 'call' },
-                { action: 'Generated weekly report', time: '1 day ago', type: 'report' },
-                { action: 'Updated team schedule', time: '2 days ago', type: 'team' },
-                { action: 'Completed training module', time: '3 days ago', type: 'training' }
-              ].map((activity, idx) => (
-                <div key={idx} className="flex items-center gap-4 p-3 rounded-lg hover:bg-slate-800/30 transition-colors">
-                  <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
-                  <div className="flex-1">
-                    <p className="text-sm text-white">{activity.action}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">{activity.time}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <RecentCard activity={activity}/>
         </div>
       </div>
     </div>
