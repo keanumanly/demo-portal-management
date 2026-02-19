@@ -33,7 +33,7 @@ export default function HelpSupportModal({ onClose }: HelpSupportModalProps) {
 
   return (
     <div 
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 top-30 right-30 left-0 backdrop-blur-sm z-50 p-4"
       onClick={handleBackdropClick}
     >
       <div 
@@ -81,7 +81,6 @@ export default function HelpSupportModal({ onClose }: HelpSupportModalProps) {
               ))}
             </div>
           )}
-          {/* Add other tabs content here */}
         </div>
       </div>
     </div>

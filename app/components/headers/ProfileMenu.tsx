@@ -1,12 +1,13 @@
+
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { ChevronDown, User, Settings, Bell, LogOut, HelpCircle, Moon, Sun } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import Dropdown from '@/components/common/Dropdown';
 import MenuItem from '@/components/common/MenuItem';
 import Avatar from '@/components/common/Avatar';
+import Divider from '@/components/common/Divider';
 import HelpSupportModal from '@/components/modals/HelpSupportModal';
 
 export default function ProfileMenu() {
@@ -23,24 +24,11 @@ export default function ProfileMenu() {
   return (
     <>
       <div className="relative">
-        <button
-          onClick={() => setShowMenu(!showMenu)}
-          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-        >
-          <div className="text-right hidden md:block">
-            <p className="text-sm font-medium text-white">Admin User</p>
-            <p className="text-xs text-slate-400">Team Manager</p>
-          </div>
-          <Avatar name="Admin User" />
-          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${showMenu ? 'rotate-180' : ''}`} />
-        </button>
-
-        {showMenu && (
           <Dropdown onClose={() => setShowMenu(false)} width="w-64">
             {/* User Info */}
             <div className="p-4 border-b border-slate-800">
               <div className="flex items-center gap-3 mb-3">
-                <Avatar name="Admin User" size="lg" />
+                <Avatar name="A" size="lg" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white">Admin User</p>
                   <p className="text-xs text-slate-400 truncate">admin@callsense.ai</p>
@@ -56,17 +44,14 @@ export default function ProfileMenu() {
               </div>
             </div>
 
-            {/* Menu Items */}
             <div className="py-2">
               <MenuItem icon={User} label="My Profile" href="/profile" />
               <MenuItem icon={Settings} label="Account Settings" href="/settings" />
               <MenuItem icon={Bell} label="Notification Preferences" href="/settings/notifications" />
             </div>
 
-            {/* Divider */}
-            <div className="h-px bg-slate-800 my-2" />
+            <Divider />
 
-            {/* Additional Options */}
             <div className="py-2">
               <MenuItem 
                 icon={theme === 'dark' ? Sun : Moon}
@@ -83,7 +68,6 @@ export default function ProfileMenu() {
               />
             </div>
 
-            {/* Logout */}
             <div className="py-2 border-t border-slate-800">
               <MenuItem 
                 icon={LogOut}
@@ -93,13 +77,11 @@ export default function ProfileMenu() {
               />
             </div>
           </Dropdown>
-        )}
-      </div>
-
-      {/* Help Modal */}
-      {showHelpModal && (
+      
+      {/* {showHelpModal && (
         <HelpSupportModal onClose={() => setShowHelpModal(false)} />
-      )}
+      )} */}
+      </div>
     </>
   );
 }

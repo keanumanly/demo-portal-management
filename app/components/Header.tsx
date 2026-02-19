@@ -98,7 +98,7 @@ export default function Header({
               />
             )}
           </div>
-
+          
           <div className="relative" ref={profileRef}>
             <button
               onClick={() => setShowProfileMenu(!showProfileMenu)}
