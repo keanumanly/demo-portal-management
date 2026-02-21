@@ -14,6 +14,7 @@ import {
   Save
 } from 'lucide-react';
 import NotificationTypesCard from '@/settings/notifications/common/NotificationTypesCard'
+import DeliveryMethodCard from '@/settings/notifications/common/DeliveryMethodCard'
 
 export default function NotificationSettingsPage() {
   const [settings, setSettings] = useState({
@@ -84,6 +85,12 @@ export default function NotificationSettingsPage() {
     }
   ]
 
+  const methods = [
+    { key: 'emailNotifications', label: 'Email', icon: Mail, description: 'Send to admin@callsense.ai' },
+    { key: 'pushNotifications', label: 'Push', icon: Bell, description: 'Browser notifications' },
+    { key: 'smsNotifications', label: 'SMS', icon: Smartphone, description: 'Text messages' }
+  ]
+
   const handleSave = () => {
     console.log('Saving notification settings:', settings);
     // TODO: Implement API call
@@ -123,68 +130,10 @@ export default function NotificationSettingsPage() {
 
       <div className="space-y-6">
         {/* Notification Types */}
-        <div className="glass-effect rounded-2xl p-6">
-          <div className="flex items-center gap-3 mb-6">
-            <Bell className="w-6 h-6 text-cyan-400" />
-            <h3 className="text-xl font-bold text-white">Notification Types</h3>
-          </div>
-          
-          <p className="text-sm text-slate-400 mb-6">
-            Choose which notifications you want to receive
-          </p>
-          
-          <NotificationTypesCard Notifications={notifTypes} toggleNotificationType={toggleNotificationType} settings={settings}/>
-        </div>
+        <NotificationTypesCard Notifications={notifTypes} toggleNotificationType={toggleNotificationType} settings={settings}/>
 
         {/* Delivery Methods */}
-        <div className="glass-effect rounded-2xl p-6">
-          <div className="flex items-center gap-3 mb-6">
-            <Mail className="w-6 h-6 text-cyan-400" />
-            <h3 className="text-xl font-bold text-white">Delivery Methods</h3>
-          </div>
-
-          <p className="text-sm text-slate-400 mb-6">
-            Choose how you want to receive notifications
-          </p>
-
-          <div className="grid grid-cols-3 gap-4">
-            {[
-              { key: 'emailNotifications', label: 'Email', icon: Mail, description: 'Send to admin@callsense.ai' },
-              { key: 'pushNotifications', label: 'Push', icon: Bell, description: 'Browser notifications' },
-              { key: 'smsNotifications', label: 'SMS', icon: Smartphone, description: 'Text messages' }
-            ].map((method) => {
-              const Icon = method.icon;
-              return (
-                <div
-                  key={method.key}
-                  onClick={() => toggleNotificationType(method.key)}
-                  className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${
-                    settings[method.key as keyof typeof settings]
-                      ? 'bg-cyan-500/10 border-cyan-500/30'
-                      : 'bg-slate-800/30 border-slate-700/30 hover:border-slate-700/50'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <Icon className={`w-5 h-5 ${settings[method.key as keyof typeof settings] ? 'text-cyan-400' : 'text-slate-400'}`} />
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                      settings[method.key as keyof typeof settings]
-                        ? 'bg-cyan-500 border-cyan-500'
-                        : 'border-slate-600'
-                    }`}>
-                      {settings[method.key as keyof typeof settings] && (
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                  <p className="text-sm font-medium text-white mb-1">{method.label}</p>
-                  <p className="text-xs text-slate-400">{method.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <DeliveryMethodCard methods={methods} toggleNotificationType={toggleNotificationType} settings={settings}/>
 
         {/* Frequency */}
         <div className="glass-effect rounded-2xl p-6">
