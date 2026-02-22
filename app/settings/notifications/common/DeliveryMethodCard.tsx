@@ -4,42 +4,42 @@ import React, { useState } from 'react';
 import { Bell, Mail } from 'lucide-react';
 
 interface Props {
-    key: string,
-    label: string, 
-    description: string,
-    icon: React.ElementType
+    key: string;
+    label: string; 
+    description: string;
+    icon: React.ElementType;
 }
 
 interface DaysProps {
-  monday: Boolean,
-  tuesday: Boolean,
-  wednesday: Boolean,
-  thursday: Boolean,
-  friday: Boolean,
-  saturday: Boolean,
-  sunday: Boolean
+  monday: Boolean;
+  tuesday: Boolean;
+  wednesday: Boolean;
+  thursday: Boolean;
+  friday: Boolean;
+  saturday: Boolean;
+  sunday: Boolean;
 }
 
 interface SettingProps {
-  callEscalations: Boolean,
-  sentimentAlerts: Boolean,
-  agentPerformance: Boolean,
-  systemUpdates: Boolean,
-  weeklyReports: Boolean,
-  emailNotifications: Boolean,
-  pushNotifications: Boolean,
-  smsNotifications: Boolean,
-  frequency: string,
-  quietHoursEnabled: Boolean,
-  quietHoursStart: string,
-  quietHoursEnd: string,
-  quietDays: DaysProps
+  callEscalations: Boolean;
+  sentimentAlerts: Boolean;
+  agentPerformance: Boolean;
+  systemUpdates: Boolean;
+  weeklyReports: Boolean;
+  emailNotifications: Boolean;
+  pushNotifications: Boolean;
+  smsNotifications: Boolean;
+  frequency: string;
+  quietHoursEnabled: Boolean;
+  quietHoursStart: string;
+  quietHoursEnd: string;
+  quietDays: DaysProps;
 }
 
 interface MethodsProps {
-    methods: Props[],
-    toggleNotificationType: (key: string) => void,
-    settings: SettingProps
+    methods: Props[];
+    toggleNotificationType: (key: string) => void;
+    settings: SettingProps;
 }
 
 export default function DeliveryMethodCard({ methods, toggleNotificationType, settings }: MethodsProps) {

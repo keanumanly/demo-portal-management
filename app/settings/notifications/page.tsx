@@ -15,9 +15,37 @@ import {
 } from 'lucide-react';
 import NotificationTypesCard from '@/settings/notifications/common/NotificationTypesCard'
 import DeliveryMethodCard from '@/settings/notifications/common/DeliveryMethodCard'
+import FrequencyCard from '@/settings/notifications/common/FrequencyCard';
+
+
+interface DaysProps {
+  monday: Boolean;
+  tuesday: Boolean;
+  wednesday: Boolean;
+  thursday: Boolean;
+  friday: Boolean;
+  saturday: Boolean;
+  sunday: Boolean;
+}
+
+interface SettingProps {
+  callEscalations: Boolean;
+  sentimentAlerts: Boolean;
+  agentPerformance: Boolean;
+  systemUpdates: Boolean;
+  weeklyReports: Boolean;
+  emailNotifications: Boolean;
+  pushNotifications: Boolean;
+  smsNotifications: Boolean;
+  frequency: string;
+  quietHoursEnabled: Boolean;
+  quietHoursStart: string;
+  quietHoursEnd: string;
+  quietDays: DaysProps;
+}
 
 export default function NotificationSettingsPage() {
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<SettingProps>({
     // Notification Types
     callEscalations: true,
     sentimentAlerts: true,
@@ -47,6 +75,7 @@ export default function NotificationSettingsPage() {
       sunday: true
     }
   });
+  
   const notifTypes = [
     { 
       key: 'callEscalations', 
@@ -89,6 +118,13 @@ export default function NotificationSettingsPage() {
     { key: 'emailNotifications', label: 'Email', icon: Mail, description: 'Send to admin@callsense.ai' },
     { key: 'pushNotifications', label: 'Push', icon: Bell, description: 'Browser notifications' },
     { key: 'smsNotifications', label: 'SMS', icon: Smartphone, description: 'Text messages' }
+  ]
+
+  const frequencies = [
+    { value: 'realtime', label: 'Real-time', description: 'Instant notifications' },
+    { value: 'hourly', label: 'Hourly', description: 'Digest every hour' },
+    { value: 'daily', label: 'Daily', description: 'Once per day' },
+    { value: 'weekly', label: 'Weekly', description: 'Weekly summary' }
   ]
 
   const handleSave = () => {
@@ -136,42 +172,7 @@ export default function NotificationSettingsPage() {
         <DeliveryMethodCard methods={methods} toggleNotificationType={toggleNotificationType} settings={settings}/>
 
         {/* Frequency */}
-        <div className="glass-effect rounded-2xl p-6">
-          <div className="flex items-center gap-3 mb-6">
-            <Clock className="w-6 h-6 text-cyan-400" />
-            <h3 className="text-xl font-bold text-white">Notification Frequency</h3>
-          </div>
-
-          <p className="text-sm text-slate-400 mb-6">
-            Control how often you receive non-urgent notifications
-          </p>
-
-          <div className="grid grid-cols-4 gap-3">
-            {[
-              { value: 'realtime', label: 'Real-time', description: 'Instant notifications' },
-              { value: 'hourly', label: 'Hourly', description: 'Digest every hour' },
-              { value: 'daily', label: 'Daily', description: 'Once per day' },
-              { value: 'weekly', label: 'Weekly', description: 'Weekly summary' }
-            ].map((freq) => (
-              <button
-                key={freq.value}
-                onClick={() => setSettings({ ...settings, frequency: freq.value })}
-                className={`p-4 rounded-xl text-left transition-all border-2 ${
-                  settings.frequency === freq.value
-                    ? 'bg-cyan-500/10 border-cyan-500/30'
-                    : 'bg-slate-800/30 border-slate-700/30 hover:border-slate-700/50'
-                }`}
-              >
-                <p className={`text-sm font-medium mb-1 ${
-                  settings.frequency === freq.value ? 'text-cyan-400' : 'text-white'
-                }`}>
-                  {freq.label}
-                </p>
-                <p className="text-xs text-slate-400">{freq.description}</p>
-              </button>
-            ))}
-          </div>
-        </div>
+        <FrequencyCard frequencies={frequencies} setSettings={setSettings} settings={settings}/>
 
         {/* Quiet Hours */}
         <div className="glass-effect rounded-2xl p-6">

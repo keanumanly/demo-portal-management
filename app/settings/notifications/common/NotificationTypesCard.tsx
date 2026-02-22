@@ -4,43 +4,43 @@ import React, { useState } from 'react';
 import { Bell } from 'lucide-react';
 
 interface Props {
-    key: string,
-    label: string, 
-    description: string,
-    icon: React.ElementType,
-    color: string
+    key: string;
+    label: string; 
+    description: string;
+    icon: React.ElementType;
+    color: string;
 }
 
 interface DaysProps {
-  monday: Boolean,
-  tuesday: Boolean,
-  wednesday: Boolean,
-  thursday: Boolean,
-  friday: Boolean,
-  saturday: Boolean,
+  monday: Boolean;
+  tuesday: Boolean;
+  wednesday: Boolean;
+  thursday: Boolean;
+  friday: Boolean;
+  saturday: Boolean;
   sunday: Boolean
 }
 
 interface SettingProps {
-  callEscalations: Boolean,
-  sentimentAlerts: Boolean,
-  agentPerformance: Boolean,
-  systemUpdates: Boolean,
-  weeklyReports: Boolean,
-  emailNotifications: Boolean,
-  pushNotifications: Boolean,
-  smsNotifications: Boolean,
-  frequency: string,
-  quietHoursEnabled: Boolean,
-  quietHoursStart: string,
-  quietHoursEnd: string,
-  quietDays: DaysProps
+  callEscalations: Boolean;
+  sentimentAlerts: Boolean;
+  agentPerformance: Boolean;
+  systemUpdates: Boolean;
+  weeklyReports: Boolean;
+  emailNotifications: Boolean;
+  pushNotifications: Boolean;
+  smsNotifications: Boolean;
+  frequency: string;
+  quietHoursEnabled: Boolean;
+  quietHoursStart: string;
+  quietHoursEnd: string;
+  quietDays: DaysProps;
 }
 
 interface ActivityProps {
-    Notifications: Props[],
-    toggleNotificationType: (key: string) => void,
-    settings: SettingProps
+    Notifications: Props[];
+    toggleNotificationType: (key: string) => void;
+    settings: SettingProps;
 }
 
 export default function NotificationTypesCard({ Notifications, toggleNotificationType, settings }: ActivityProps) {
