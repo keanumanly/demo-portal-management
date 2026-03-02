@@ -32,6 +32,9 @@
       "@/profile/common/*": [
         "./app/profile/common/*"
       ],
+      "@/settings/common/*": [
+        "./app/settings/common/*"
+      ],
       "@/settings/notifications/common/*": [
         "./app/settings/notifications/common/*"
       ],

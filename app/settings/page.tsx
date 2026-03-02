@@ -17,6 +17,7 @@ import {
   Smartphone,
   Clock
 } from 'lucide-react';
+import SideBarCard from '@/settings/common/SideBarCard'
 
 export default function SettingsPage() {
   const searchParams = useSearchParams();
@@ -106,29 +107,7 @@ export default function SettingsPage() {
 
       <div className="grid grid-cols-4 gap-6">
         {/* Tabs Sidebar */}
-        <div className="col-span-1">
-          <div className="glass-effect rounded-2xl p-4 sticky top-24">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`
-                    w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all mb-2
-                    ${activeTab === tab.id
-                      ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-white border border-cyan-500/30'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800/40'
-                    }
-                  `}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span className="font-medium">{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        <SideBarCard tabs={tabs} setActiveTab={setActiveTab} activeTab={activeTab}/>
 
         {/* Content */}
         <div className="col-span-3">
