@@ -101,7 +101,7 @@ export default function CallTableCard({ filteredCalls }: TableProps) {
                     <td className="py-4 px-4">
                       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <Link
-                          href={`/calls//details/${call.id}`}
+                          href={`/calls//details/${call.callId}`}
                           className="p-2 hover:bg-cyan-500/20 rounded-lg transition-colors text-cyan-400"
                           title="View Details"
                         >
