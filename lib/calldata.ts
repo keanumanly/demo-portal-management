@@ -254,3 +254,22 @@ export interface DetailedCall {
         ]
       },
   ]
+export interface TranscriptProps { 
+      speaker: string; 
+      time: string; 
+      text: string;
+  }
+
+export  const transcriptdata: TranscriptProps[] = [
+    { speaker: 'Agent', time: '00:00', text: 'Thank you for calling. This is Sarah. How can I help you today?' },
+    { speaker: 'Customer', time: '00:05', text: 'Hi Sarah, I\'m calling about a charge on my account that I don\'t recognize.' },
+    { speaker: 'Agent', time: '00:12', text: 'I\'d be happy to help you with that. Let me pull up your account. Can you provide me with your account number?' },
+    { speaker: 'Customer', time: '00:20', text: 'Sure, it\'s 12345678.' },
+    { speaker: 'Agent', time: '00:25', text: 'Thank you. I see your account here. Looking at your recent transactions, I can see the charge you\'re referring to. Let me explain what that is.' },
+    { speaker: 'Customer', time: '00:35', text: 'Yes, please. I\'m really confused about it.' },
+    { speaker: 'Agent', time: '00:40', text: 'That charge is for the premium service upgrade you selected last month. It includes additional features like priority support and advanced analytics.' },
+    { speaker: 'Customer', time: '00:52', text: 'Oh, I see! I completely forgot about that upgrade. That makes sense now.' },
+    { speaker: 'Agent', time: '01:00', text: 'Great! Is there anything else I can help you with today?' },
+    { speaker: 'Customer', time: '01:05', text: 'No, that\'s all. Thank you so much for clarifying!' },
+    { speaker: 'Agent', time: '01:10', text: 'You\'re very welcome! Have a wonderful day!' }
+  ];

@@ -13,7 +13,7 @@ interface Props {
     totalDuration: number;
 }
 
-export default function CallTableCard({ callData, totalDuration }: Props) {
+export default function InfoCard({ callData, totalDuration }: Props) {
     return (
         <div className="grid grid-cols-4 gap-6 mb-8">
           <div className="glass-effect rounded-2xl p-6">
