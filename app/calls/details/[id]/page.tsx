@@ -21,6 +21,7 @@ import {
   Download,
   Share2
 } from 'lucide-react';
+import CallTableCard from "@/calls/details/[id]/common/InfoCard"
 import { DetailedCall, detailcalldata } from '@/lib/calldata';
 
 export default function CallDetailPage() {
@@ -83,11 +84,11 @@ export default function CallDetailPage() {
                 <p className="text-slate-400 font-mono text-sm">Detailed call analysis and transcript</p>
               </div>
               <div className="flex items-center gap-3">
-                <button className="flex items-center gap-2 px-4 py-2.5 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg transition-all text-slate-200 text-sm">
+                <button className="flex items-center gap-2 px-4 py-2.5 cursor-pointer bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 rounded-lg transition-all text-slate-200 text-sm">
                   <Share2 className="w-4 h-4" />
                   Share
                 </button>
-                <button className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-lg transition-all text-white text-sm font-medium">
+                <button className="flex items-center gap-2 px-4 py-2.5 cursor-pointer  bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-lg transition-all text-white text-sm font-medium">
                   <Download className="w-4 h-4" />
                   Export Report
                 </button>
@@ -95,41 +96,7 @@ export default function CallDetailPage() {
             </div>
       
             {/* Info Cards */}
-            <div className="grid grid-cols-4 gap-6 mb-8">
-              <div className="glass-effect rounded-2xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
-                    {callData.agent.avatar}
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-400">Agent</p>
-                    <p className="text-sm font-medium text-white">{callData.agent.name}</p>
-                  </div>
-                </div>
-                <p className="text-xs text-slate-500 font-mono">{callData.agent.id}</p>
-              </div>
-      
-              <div className="glass-effect rounded-2xl p-6">
-                <User className="w-5 h-5 text-slate-400 mb-3" />
-                <p className="text-xs text-slate-400 mb-1">Customer</p>
-                <p className="text-sm font-medium text-white mb-1">{callData.customer.name}</p>
-                <p className="text-xs text-slate-500 font-mono">{callData.customer.phone}</p>
-              </div>
-      
-              <div className="glass-effect rounded-2xl p-6">
-                <Calendar className="w-5 h-5 text-slate-400 mb-3" />
-                <p className="text-xs text-slate-400 mb-1">Date & Time</p>
-                <p className="text-sm font-medium text-white mb-1">{new Date(callData.date).toLocaleDateString()}</p>
-                <p className="text-xs text-slate-500">{callData.time}</p>
-              </div>
-      
-              <div className="glass-effect rounded-2xl p-6">
-                <Clock className="w-5 h-5 text-slate-400 mb-3" />
-                <p className="text-xs text-slate-400 mb-1">Duration</p>
-                <p className="text-2xl font-bold text-white font-mono mb-1">{callData.duration}</p>
-                <p className="text-xs text-slate-500">{totalDuration} seconds</p>
-              </div>
-            </div>
+            <CallTableCard callData={callData} totalDuration={totalDuration}/>
       
             {/* Main Content */}
             <div className="grid grid-cols-3 gap-6 mb-8">

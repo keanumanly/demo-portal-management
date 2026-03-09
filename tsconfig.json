@@ -38,6 +38,9 @@
       "@/settings/notifications/common/*": [
         "./app/settings/notifications/common/*"
       ],
+      "@/calls/details/[id]/common/*": [
+        "./app/calls/details/[id]/common/*"
+      ],
       "@/calls/common/*": [
         "./app/calls/common/*"
       ],
