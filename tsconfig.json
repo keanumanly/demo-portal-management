@@ -44,6 +44,9 @@
       "@/calls/common/*": [
         "./app/calls/common/*"
       ],
+      "@/agents/common/*": [
+        "./app/agents/common/*"
+      ],
       "@/contexts/*": [
         "./app/contexts/*"
       ],
