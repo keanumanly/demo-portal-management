@@ -50,6 +50,9 @@
       "@/transcripts/common/*": [
         "./app/transcripts/common/*"
       ],
+      "@/insights/common/*": [
+        "./app/insights/common/*"
+      ],
       "@/contexts/*": [
         "./app/contexts/*"
       ],
