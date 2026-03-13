@@ -47,6 +47,9 @@
       "@/agents/common/*": [
         "./app/agents/common/*"
       ],
+      "@/transcripts/common/*": [
+        "./app/transcripts/common/*"
+      ],
       "@/contexts/*": [
         "./app/contexts/*"
       ],
