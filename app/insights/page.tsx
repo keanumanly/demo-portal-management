@@ -7,6 +7,7 @@ import {
   ChevronRight, RefreshCw, Sparkles, BookOpen,
   ArrowUpRight, ArrowDownRight, Flame, Shield,
 } from "lucide-react";
+import BannerCard from "@/insights/common/BannerCard"
 import { INSIGHTS, COACHING, KEYWORDS, HOUR_HEATMAP, PATTERNS, SEVERITY_CONFIG, TYPE_ICON } from '@/lib/insights';
 
 function ScoreRing({ score, delta }: { score: number; delta: number }) {
@@ -68,7 +69,7 @@ export default function InsightsPage() {
             <p className="text-slate-400 text-sm ml-11">AI-generated patterns, coaching tips, and risk signals from your call data.</p>
           </div>
           <button onClick={() => { setRefreshing(true); setTimeout(() => setRefreshing(false), 1200); }}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 border border-slate-700/50 text-sm text-slate-300 hover:text-white hover:border-slate-600 transition-colors font-mono">
+            className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-lg bg-slate-800 border border-slate-700/50 text-sm text-slate-300 hover:text-white hover:border-slate-600 transition-colors font-mono">
             <RefreshCw size={13} className={refreshing ? "animate-spin text-violet-400" : ""} />
             {refreshing ? "Analyzing..." : "Refresh"}
           </button>
@@ -76,17 +77,7 @@ export default function InsightsPage() {
 
         {/* Critical banner */}
         {criticalCount > 0 && (
-          <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-rose-500/8 border border-rose-500/25">
-            <div className="p-1.5 rounded-lg bg-rose-500/15"><AlertTriangle size={14} className="text-rose-400" /></div>
-            <div className="flex-1">
-              <span className="text-sm font-semibold text-rose-300">{criticalCount} critical signal{criticalCount > 1 ? "s" : ""} detected</span>
-              <span className="text-sm text-slate-400 ml-2">— {warningCount} additional warning{warningCount > 1 ? "s" : ""} require attention.</span>
-            </div>
-            <button onClick={() => { setActiveSeverity("critical"); setTab("insights"); }}
-              className="text-xs font-mono text-rose-400 hover:text-rose-300 flex items-center gap-1">
-              View all <ChevronRight size={12} />
-            </button>
-          </div>
+            <BannerCard criticalCount={criticalCount} warningCount={warningCount} setActiveSeverity={setActiveSeverity} setTab={setTab} />
         )}
 
         {/* Summary cards */}
