@@ -1,10 +1,6 @@
 'use client';
 
 import React, { useState, ElementType } from 'react';
-import { Minus, ArrowUpRight, ArrowDownRight,
-    Phone, Clock, Target, Star, Users, Activity } from 'lucide-react';
-    import { AGENTS } from '@/lib/analytics';
-
 interface Props {
     volumeData: { label: string; calls: number; resolved: number }[];
     totalCalls: number;
