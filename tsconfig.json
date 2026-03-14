@@ -53,6 +53,9 @@
       "@/insights/common/*": [
         "./app/insights/common/*"
       ],
+      "@/analytics/common/*": [
+        "./app/analytics/common/*"
+      ],
       "@/contexts/*": [
         "./app/contexts/*"
       ],
