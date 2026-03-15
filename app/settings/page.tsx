@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { 
   User, 
@@ -9,9 +9,9 @@ import {
   Trash2
 } from 'lucide-react';
 import SideBarCard from '@/settings/common/SideBarCard'
-// import AccountTabCard from '@/settings/common/AccountTabCard'
-// import SecurityTabCard from '@/settings/common/SecurityTabCard'
-// import PreferencesTabCard from '@/settings/common/PreferencesTabCard'
+import AccountTabCard from '@/settings/common/AccountTabCard'
+import SecurityTabCard from '@/settings/common/SecurityTabCard'
+import PreferencesTabCard from '@/settings/common/PreferencesTabCard'
 
 export default function SettingsPage() {
   const searchParams = useSearchParams();
@@ -58,6 +58,8 @@ export default function SettingsPage() {
 
   const handleSaveAccount = () => {
     console.log('Saving account settings:', accountData);
+    // TODO: Implement API call
+    alert('Account settings saved!');
   };
 
   const handleChangePassword = () => {
@@ -90,7 +92,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold gradient-text mb-2">Settings</h1>
@@ -101,7 +103,7 @@ export default function SettingsPage() {
         {/* Tabs Sidebar */}
         <SideBarCard tabs={tabs} setActiveTab={setActiveTab} activeTab={activeTab}/>
 
-        {/* <div className="col-span-3">
+        <div className="col-span-3">
 
           {activeTab === 'account' && (
             <AccountTabCard accountData={accountData} setAccountData={setAccountData} handleSaveAccount={handleSaveAccount}/>
@@ -130,7 +132,7 @@ export default function SettingsPage() {
               Delete Account
             </button>
           </div>
-        </div> */}
+        </div>
       </div>
 
       {/* Delete Confirmation Modal */}
@@ -158,6 +160,6 @@ export default function SettingsPage() {
           </div>
         </div>
       )}
-    </div>
+    </Suspense>
   );
 }
