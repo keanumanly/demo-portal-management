@@ -6,21 +6,12 @@ import {
   User, 
   Shield, 
   Bell, 
-  Globe,
-  Lock,
-  Mail,
-  Phone,
-  Trash2,
-  Save,
-  Eye,
-  EyeOff,
-  Smartphone,
-  Clock
+  Trash2
 } from 'lucide-react';
 import SideBarCard from '@/settings/common/SideBarCard'
-import AccountTabCard from '@/settings/common/AccountTabCard'
-import SecurityTabCard from '@/settings/common/SecurityTabCard'
-import PreferencesTabCard from '@/settings/common/PreferencesTabCard'
+// import AccountTabCard from '@/settings/common/AccountTabCard'
+// import SecurityTabCard from '@/settings/common/SecurityTabCard'
+// import PreferencesTabCard from '@/settings/common/PreferencesTabCard'
 
 export default function SettingsPage() {
   const searchParams = useSearchParams();
@@ -67,8 +58,6 @@ export default function SettingsPage() {
 
   const handleSaveAccount = () => {
     console.log('Saving account settings:', accountData);
-    // TODO: Implement API call
-    alert('Account settings saved!');
   };
 
   const handleChangePassword = () => {
@@ -112,26 +101,22 @@ export default function SettingsPage() {
         {/* Tabs Sidebar */}
         <SideBarCard tabs={tabs} setActiveTab={setActiveTab} activeTab={activeTab}/>
 
-        {/* Content */}
-        <div className="col-span-3">
-          {/* Account Tab */}
+        {/* <div className="col-span-3">
+
           {activeTab === 'account' && (
             <AccountTabCard accountData={accountData} setAccountData={setAccountData} handleSaveAccount={handleSaveAccount}/>
           )}
 
-          {/* Security Tab */}
           {activeTab === 'security' && (
             <SecurityTabCard 
             showPassword={showPassword} setShowPassword={setShowPassword} 
             securityData={securityData} setSecurityData={setSecurityData} handleChangePassword={handleChangePassword}/>
           )}
 
-          {/* Preferences Tab */}
           {activeTab === 'preferences' && (
             <PreferencesTabCard preferences={preferences} setPreferences={setPreferences} handleSavePreferences={handleSavePreferences}/>
           )}
 
-          {/* Danger Zone */}
           <div className="glass-effect rounded-2xl p-6 border-2 border-red-500/20">
             <h3 className="text-xl font-bold text-red-400 mb-2">Danger Zone</h3>
             <p className="text-sm text-slate-400 mb-4">
@@ -145,7 +130,7 @@ export default function SettingsPage() {
               Delete Account
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Delete Confirmation Modal */}
