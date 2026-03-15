@@ -12,6 +12,7 @@ import KpiCard from "@/analytics/common/KpiCard"
 import CallVolumeCard from "@/analytics/common/CallVolumeCard"
 import SentimentTrendCard from "@/analytics/common/SentimentTrendCard"
 import QAScoreTrendCard from "@/analytics/common/QAScoreTrendCard"
+import ResolutionFunnelCard from "@/analytics/common/ResolutionFunnelCard"
 import { Range, VOLUME, SENTIMENT_TREND, QA_TREND, AGENTS, QUEUES, TALK_RATIO, FUNNEL, DURATION_DIST } from '@/lib/analytics';
 
 export default function AnalyticsPage() {
@@ -74,36 +75,7 @@ export default function AnalyticsPage() {
           <QAScoreTrendCard qaData={qaData} />
 
           {/* Resolution funnel */}
-          <div className="bg-slate-900/60 border border-slate-700/30 rounded-xl p-5">
-            <div className="flex items-center justify-between mb-5">
-              <div>
-                <h3 className="text-sm font-semibold text-white">Resolution Funnel</h3>
-                <p className="text-xs text-slate-500 font-mono mt-0.5">Call journey breakdown</p>
-              </div>
-            </div>
-            <div className="space-y-2.5">
-              {FUNNEL.map((stage, i) => (
-                <div key={stage.label}>
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono text-slate-600 w-4">{i+1}</span>
-                      <span className="text-sm text-slate-300">{stage.label}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono text-slate-400">{stage.value.toLocaleString()}</span>
-                      <span className={`text-xs font-mono font-bold bg-gradient-to-r ${stage.color} bg-clip-text text-transparent`}>
-                        {stage.pct}%
-                      </span>
-                    </div>
-                  </div>
-                  <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                    <div className={`h-full bg-gradient-to-r ${stage.color} rounded-full`}
-                      style={{ width: `${stage.pct}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <ResolutionFunnelCard FUNNEL={FUNNEL}/>
         </div>
 
         {/* ── Row 3: Agent leaderboard + Queue breakdown ── */}
